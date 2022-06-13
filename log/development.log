@@ -5407,3 +5407,929 @@ Processing by Api::DataAggregationController#fetch_aggregation_result as */*
 Completed 200 OK in 173750ms (Views: 6.7ms | ActiveRecord: 6.6ms | Allocations: 68011966)
 
 
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:51:25 +0530
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001044e4d28 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-233wif.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (1.4ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwe"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 9.5ms | Allocations: 5613)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/api/application_controller.rb:10:in `current_user'
+app/controllers/api/user_csv_record_controller.rb:6:in `import'
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:51:42 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001282b38a0 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-1j7tigb.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (11.5ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gw"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mUploadedFile Create (2.3ms)[0m  [1m[32mINSERT INTO "uploaded_files" ("file_name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["file_name", "sample_-_sheet1__6_.csv"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.798772"], ["updated_at", "2022-06-13 12:21:42.798772"]]
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.4ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (6.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-12"], ["value", 500], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.824197"], ["updated_at", "2022-06-13 12:21:42.824197"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-13"], ["value", 800], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.839790"], ["updated_at", "2022-06-13 12:21:42.839790"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (1.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-11"], ["value", 900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.844680"], ["updated_at", "2022-06-13 12:21:42.844680"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-20"], ["value", 1000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.850450"], ["updated_at", "2022-06-13 12:21:42.850450"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-14"], ["value", 1100], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.855059"], ["updated_at", "2022-06-13 12:21:42.855059"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.4ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-15"], ["value", 1500], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.859311"], ["updated_at", "2022-06-13 12:21:42.859311"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-16"], ["value", 1600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.864256"], ["updated_at", "2022-06-13 12:21:42.864256"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-17"], ["value", 1700], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.870125"], ["updated_at", "2022-06-13 12:21:42.870125"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-18"], ["value", 1900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.874539"], ["updated_at", "2022-06-13 12:21:42.874539"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-19"], ["value", 2000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.878601"], ["updated_at", "2022-06-13 12:21:42.878601"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-01"], ["value", 2100], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.882520"], ["updated_at", "2022-06-13 12:21:42.882520"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-02"], ["value", 2200], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.894100"], ["updated_at", "2022-06-13 12:21:42.894100"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-03"], ["value", 2300], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.898001"], ["updated_at", "2022-06-13 12:21:42.898001"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-04"], ["value", 2400], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.902361"], ["updated_at", "2022-06-13 12:21:42.902361"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-05"], ["value", 2500], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.906291"], ["updated_at", "2022-06-13 12:21:42.906291"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-06"], ["value", 2600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.909727"], ["updated_at", "2022-06-13 12:21:42.909727"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-07"], ["value", 2700], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.912854"], ["updated_at", "2022-06-13 12:21:42.912854"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-08"], ["value", 1900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.916168"], ["updated_at", "2022-06-13 12:21:42.916168"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-09"], ["value", 1700], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.919831"], ["updated_at", "2022-06-13 12:21:42.919831"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-10"], ["value", 1600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.923207"], ["updated_at", "2022-06-13 12:21:42.923207"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-11"], ["value", 1500], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.926744"], ["updated_at", "2022-06-13 12:21:42.926744"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-08-12"], ["value", 4000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.930243"], ["updated_at", "2022-06-13 12:21:42.930243"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.8ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-09-12"], ["value", 5000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.933695"], ["updated_at", "2022-06-13 12:21:42.933695"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-10-12"], ["value", 6000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.937770"], ["updated_at", "2022-06-13 12:21:42.937770"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-11-12"], ["value", 7000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.941122"], ["updated_at", "2022-06-13 12:21:42.941122"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (2.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-12-12"], ["value", 8000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.944477"], ["updated_at", "2022-06-13 12:21:42.944477"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (1.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (1.0ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-01-10"], ["value", 9000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.950819"], ["updated_at", "2022-06-13 12:21:42.950819"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-02-10"], ["value", 10000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.954971"], ["updated_at", "2022-06-13 12:21:42.954971"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-03-10"], ["value", 11000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.958015"], ["updated_at", "2022-06-13 12:21:42.958015"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-04-10"], ["value", 12000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.961172"], ["updated_at", "2022-06-13 12:21:42.961172"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-05-10"], ["value", 13000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.964335"], ["updated_at", "2022-06-13 12:21:42.964335"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.8ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-06-10"], ["value", 14000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.967833"], ["updated_at", "2022-06-13 12:21:42.967833"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-07-10"], ["value", 15000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:21:42.971405"], ["updated_at", "2022-06-13 12:21:42.971405"], ["uploaded_file_id", 3]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+Completed 200 OK in 220ms (Views: 0.2ms | ActiveRecord: 78.3ms | Allocations: 105058)
+
+
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:51:58 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x0000000104141cc0 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-1ixi5xz.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (0.4ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwee"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.4ms | Allocations: 1097)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/api/application_controller.rb:10:in `current_user'
+app/controllers/api/user_csv_record_controller.rb:6:in `import'
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:52:35 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010d80ed60 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-1gpb8ai.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (0.4ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwee"], ["LIMIT", 1]]
+  [1m[36mCACHE Doorkeeper::AccessToken Load (0.0ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwee"], ["LIMIT", 1]]
+  [1m[36mCACHE Doorkeeper::AccessToken Load (0.0ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwee"], ["LIMIT", 1]]
+  [1m[36mCACHE Doorkeeper::AccessToken Load (0.0ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwee"], ["LIMIT", 1]]
+Filter chain halted as :doorkeeper_authorize! rendered or redirected
+Completed 401 Unauthorized in 9ms (ActiveRecord: 0.4ms | Allocations: 6604)
+
+
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:52:44 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001044c4190 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-1mhvqx2.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (0.3ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gw"], ["LIMIT", 1]]
+Filter chain halted as :doorkeeper_authorize! rendered or redirected
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.3ms | Allocations: 924)
+
+
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:53:05 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010f722620 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-1y4vlts.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (0.6ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gw"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mUploadedFile Create (0.5ms)[0m  [1m[32mINSERT INTO "uploaded_files" ("file_name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["file_name", "sample_-_sheet1__6_.csv"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.479928"], ["updated_at", "2022-06-13 12:23:05.479928"]]
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (3.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-12"], ["value", 500], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.498163"], ["updated_at", "2022-06-13 12:23:05.498163"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-13"], ["value", 800], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.511076"], ["updated_at", "2022-06-13 12:23:05.511076"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (1.7ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-11"], ["value", 900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.517929"], ["updated_at", "2022-06-13 12:23:05.517929"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-20"], ["value", 1000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.521944"], ["updated_at", "2022-06-13 12:23:05.521944"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-14"], ["value", 1100], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.525421"], ["updated_at", "2022-06-13 12:23:05.525421"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-15"], ["value", 1500], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.528710"], ["updated_at", "2022-06-13 12:23:05.528710"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (2.0ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-16"], ["value", 1600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.534495"], ["updated_at", "2022-06-13 12:23:05.534495"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (1.0ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-17"], ["value", 1700], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.540749"], ["updated_at", "2022-06-13 12:23:05.540749"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-18"], ["value", 1900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.544889"], ["updated_at", "2022-06-13 12:23:05.544889"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-19"], ["value", 2000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.548237"], ["updated_at", "2022-06-13 12:23:05.548237"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-01"], ["value", 2100], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.551441"], ["updated_at", "2022-06-13 12:23:05.551441"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-02"], ["value", 2200], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.554925"], ["updated_at", "2022-06-13 12:23:05.554925"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-03"], ["value", 2300], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.557899"], ["updated_at", "2022-06-13 12:23:05.557899"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-04"], ["value", 2400], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.561276"], ["updated_at", "2022-06-13 12:23:05.561276"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-05"], ["value", 2500], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.564781"], ["updated_at", "2022-06-13 12:23:05.564781"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-06"], ["value", 2600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.568229"], ["updated_at", "2022-06-13 12:23:05.568229"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-07"], ["value", 2700], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.571633"], ["updated_at", "2022-06-13 12:23:05.571633"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-08"], ["value", 1900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.574730"], ["updated_at", "2022-06-13 12:23:05.574730"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-09"], ["value", 1700], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.577742"], ["updated_at", "2022-06-13 12:23:05.577742"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-10"], ["value", 1600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.580854"], ["updated_at", "2022-06-13 12:23:05.580854"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-11"], ["value", 1500], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.584028"], ["updated_at", "2022-06-13 12:23:05.584028"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-08-12"], ["value", 4000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.587426"], ["updated_at", "2022-06-13 12:23:05.587426"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-09-12"], ["value", 5000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.590847"], ["updated_at", "2022-06-13 12:23:05.590847"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-10-12"], ["value", 6000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.593852"], ["updated_at", "2022-06-13 12:23:05.593852"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-11-12"], ["value", 7000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.596920"], ["updated_at", "2022-06-13 12:23:05.596920"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-12-12"], ["value", 8000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.600424"], ["updated_at", "2022-06-13 12:23:05.600424"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-01-10"], ["value", 9000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.604012"], ["updated_at", "2022-06-13 12:23:05.604012"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-02-10"], ["value", 10000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.607498"], ["updated_at", "2022-06-13 12:23:05.607498"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-03-10"], ["value", 11000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.611185"], ["updated_at", "2022-06-13 12:23:05.611185"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-04-10"], ["value", 12000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.614670"], ["updated_at", "2022-06-13 12:23:05.614670"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.4ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-05-10"], ["value", 13000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.620798"], ["updated_at", "2022-06-13 12:23:05.620798"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-06-10"], ["value", 14000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.624508"], ["updated_at", "2022-06-13 12:23:05.624508"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (1.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-07-10"], ["value", 15000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:05.628242"], ["updated_at", "2022-06-13 12:23:05.628242"], ["uploaded_file_id", 4]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+Completed 200 OK in 175ms (Views: 0.1ms | ActiveRecord: 59.9ms | Allocations: 99049)
+
+
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:53:15 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x0000000104666548 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-1ygps9d.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (0.3ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gwee"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/api/application_controller.rb:10:in `current_user'
+app/controllers/api/user_csv_record_controller.rb:6:in `import'
+Started POST "/api/user_csv_record/import" for ::1 at 2022-06-13 17:53:40 +0530
+Processing by Api::UserCsvRecordController#import as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001044d76f0 @tempfile=#<Tempfile:/var/folders/l3/46wgx3p57qvd_m2yzzz0f2t00000gn/T/RackMultipart20220613-65621-10q432q.csv>, @original_filename="sample_-_sheet1__6_.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"sample_-_sheet1__6_.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mDoorkeeper::AccessToken Load (0.4ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gw"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mUploadedFile Create (0.4ms)[0m  [1m[32mINSERT INTO "uploaded_files" ("file_name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["file_name", "sample_-_sheet1__6_.csv"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.936064"], ["updated_at", "2022-06-13 12:23:40.936064"]]
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/uploaded_file.rb:5:in `add_file'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.9ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-12"], ["value", 500], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.945723"], ["updated_at", "2022-06-13 12:23:40.945723"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-13"], ["value", 800], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.953590"], ["updated_at", "2022-06-13 12:23:40.953590"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-11"], ["value", 900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.960492"], ["updated_at", "2022-06-13 12:23:40.960492"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-20"], ["value", 1000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.967422"], ["updated_at", "2022-06-13 12:23:40.967422"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-14"], ["value", 1100], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.971472"], ["updated_at", "2022-06-13 12:23:40.971472"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-15"], ["value", 1500], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.976030"], ["updated_at", "2022-06-13 12:23:40.976030"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-16"], ["value", 1600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.981108"], ["updated_at", "2022-06-13 12:23:40.981108"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-17"], ["value", 1700], ["domain_name", "facebook.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.984718"], ["updated_at", "2022-06-13 12:23:40.984718"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-18"], ["value", 1900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.988644"], ["updated_at", "2022-06-13 12:23:40.988644"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-06-19"], ["value", 2000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.991874"], ["updated_at", "2022-06-13 12:23:40.991874"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-01"], ["value", 2100], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.995183"], ["updated_at", "2022-06-13 12:23:40.995183"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-02"], ["value", 2200], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:40.999363"], ["updated_at", "2022-06-13 12:23:40.999363"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-03"], ["value", 2300], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.003351"], ["updated_at", "2022-06-13 12:23:41.003351"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-04"], ["value", 2400], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.012617"], ["updated_at", "2022-06-13 12:23:41.012617"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-05"], ["value", 2500], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.017587"], ["updated_at", "2022-06-13 12:23:41.017587"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-06"], ["value", 2600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.021834"], ["updated_at", "2022-06-13 12:23:41.021834"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-07"], ["value", 2700], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.026499"], ["updated_at", "2022-06-13 12:23:41.026499"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-08"], ["value", 1900], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.032235"], ["updated_at", "2022-06-13 12:23:41.032235"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.7ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-09"], ["value", 1700], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.042338"], ["updated_at", "2022-06-13 12:23:41.042338"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (1.1ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-10"], ["value", 1600], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.050481"], ["updated_at", "2022-06-13 12:23:41.050481"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-07-11"], ["value", 1500], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.055919"], ["updated_at", "2022-06-13 12:23:41.055919"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.6ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-08-12"], ["value", 4000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.060501"], ["updated_at", "2022-06-13 12:23:41.060501"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-09-12"], ["value", 5000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.065054"], ["updated_at", "2022-06-13 12:23:41.065054"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.3ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-10-12"], ["value", 6000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.069785"], ["updated_at", "2022-06-13 12:23:41.069785"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-11-12"], ["value", 7000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.074453"], ["updated_at", "2022-06-13 12:23:41.074453"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2022-12-12"], ["value", 8000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.078729"], ["updated_at", "2022-06-13 12:23:41.078729"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-01-10"], ["value", 9000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.082838"], ["updated_at", "2022-06-13 12:23:41.082838"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.3ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-02-10"], ["value", 10000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.087449"], ["updated_at", "2022-06-13 12:23:41.087449"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.2ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-03-10"], ["value", 11000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.091592"], ["updated_at", "2022-06-13 12:23:41.091592"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.1ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-04-10"], ["value", 12000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.095321"], ["updated_at", "2022-06-13 12:23:41.095321"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.4ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-05-10"], ["value", 13000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.099482"], ["updated_at", "2022-06-13 12:23:41.099482"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.4ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-06-10"], ["value", 14000], ["domain_name", "google.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.103958"], ["updated_at", "2022-06-13 12:23:41.103958"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUploadedFile Load (0.2ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mUserCsvRecord Create (0.5ms)[0m  [1m[32mINSERT INTO "user_csv_records" ("date", "value", "domain_name", "user_id", "created_at", "updated_at", "uploaded_file_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["date", "2023-07-10"], ["value", 15000], ["domain_name", "xyz.com"], ["user_id", 3], ["created_at", "2022-06-13 12:23:41.108112"], ["updated_at", "2022-06-13 12:23:41.108112"], ["uploaded_file_id", 5]]
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user_csv_record.rb:38:in `block in import'
+Completed 200 OK in 183ms (Views: 0.2ms | ActiveRecord: 42.6ms | Allocations: 88056)
+
+
+Started GET "/api/data_aggregation/fetch_aggregation_result" for ::1 at 2022-06-13 20:48:51 +0530
+Processing by Api::DataAggregationController#fetch_aggregation_result as */*
+  [1m[36mDoorkeeper::AccessToken Load (2.5ms)[0m  [1m[34mSELECT "oauth_access_tokens".* FROM "oauth_access_tokens" WHERE "oauth_access_tokens"."token" = $1 LIMIT $2[0m  [["token", "oaLVvzMTdXSat_tOVJc5WxCAQpQoDR7xGq_HZaF40Gw"], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/application_controller.rb:10:in `current_user'
+  [1m[36mUploadedFile Load (0.9ms)[0m  [1m[34mSELECT "uploaded_files".* FROM "uploaded_files" WHERE "uploaded_files"."user_id" = $1 ORDER BY "uploaded_files"."id" DESC LIMIT $2[0m  [["user_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/data_aggregation_controller.rb:5:in `fetch_aggregation_result'
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "user_csv_records"."value" FROM "user_csv_records" WHERE "user_csv_records"."uploaded_file_id" = $1[0m  [["uploaded_file_id", 5]]
+  ↳ app/controllers/api/data_aggregation_controller.rb:17:in `get_max_value'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT "user_csv_records"."value" FROM "user_csv_records" WHERE "user_csv_records"."uploaded_file_id" = $1[0m  [["uploaded_file_id", 5]]
+  ↳ app/controllers/api/data_aggregation_controller.rb:23:in `get_median'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "user_csv_records"."date", "user_csv_records"."value" FROM "user_csv_records" WHERE "user_csv_records"."uploaded_file_id" = $1[0m  [["uploaded_file_id", 5]]
+  ↳ app/controllers/api/data_aggregation_controller.rb:29:in `get_time_series_daywise'
+  [1m[35m (5.4ms)[0m  [1m[34mSELECT COUNT(*) AS count_all, DATE_TRUNC('month', "user_csv_records"."date"::timestamptz AT TIME ZONE 'Etc/UTC')::date AS date_trunc_month_user_csv_records_date_timestamptz_at_time_zone FROM "user_csv_records" WHERE "user_csv_records"."uploaded_file_id" = $1 AND ("user_csv_records"."date" IS NOT NULL) GROUP BY DATE_TRUNC('month', "user_csv_records"."date"::timestamptz AT TIME ZONE 'Etc/UTC')::date[0m  [["uploaded_file_id", 5]]
+  ↳ app/controllers/api/data_aggregation_controller.rb:37:in `get_time_series_monthwise'
+[AWS S3 200 8.291825 0 retries] put_object(:acl=>:public_read,:bucket_name=>"synapticproject",:content_length=>3487,:data=>#<File:/Users/situgupta/Desktop/Demo_Project/synaptic_api_main/public/generated_report_5.pdf (3487 bytes)>,:key=>"generated_report_5.pdf")  
+
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/data_aggregation_controller.rb:56:in `generate_pdf_file'
+  [1m[36mUploadedFile Update (2.8ms)[0m  [1m[33mUPDATE "uploaded_files" SET "updated_at" = $1, "s3_file_path" = $2 WHERE "uploaded_files"."id" = $3[0m  [["updated_at", "2022-06-13 15:21:08.421518"], ["s3_file_path", "https://synapticproject.s3.amazonaws.com/generated_report_5.pdf"], ["id", 5]]
+  ↳ app/controllers/api/data_aggregation_controller.rb:56:in `generate_pdf_file'
+  [1m[36mTRANSACTION (5.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/data_aggregation_controller.rb:56:in `generate_pdf_file'
+Completed 200 OK in 136725ms (Views: 1.1ms | ActiveRecord: 66.4ms | Allocations: 65567888)
+
+

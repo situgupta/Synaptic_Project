@@ -22,7 +22,6 @@ module Api
             File.delete(save_path)
             csv_url = "https://synapticproject.s3.amazonaws.com/#{csv_file_name}"
             render(json: { url: csv_url,message: "File Generated" }, status: 200)
-            #send_data @csv_records.to_csv, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;data=CSV-#{DateTime.current}.csv"
         end
 
         def index

@@ -33,7 +33,6 @@ module Api
         end
 
         def get_time_series_monthwise(records)
-            debugger
             records_by_month = records.group_by_month(:date,format: "%b %Y").sum(:value)
             series = Hash[records_by_month.map {|key, value| [key.to_s, value]}]
             @monthwise_series = Prophet.forecast(series)
