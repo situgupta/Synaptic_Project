@@ -24,24 +24,6 @@ module Api
             render(json: { url: csv_url,message: "File Generated" }, status: 200)
         end
 
-        def index
-            @csv_records = current_user.csv_records.all
-            @max = UserCsvRecord.max_value(@csv_records)
         
-            respond_to do |format|
-                format.html
-                format.csv {send_data @csv_records.to_csv,
-                filename:"CSV-#{DateTime.current}.csv"}
-
-            end
-        end
-
-
-        private
-        
-        # Only allow a list of trusted parameters through.
-        def user_csv_record_params
-            params.require(:csv_record).permit(:date, :value, :domain_name)
-        end
     end
 end
